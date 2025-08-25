@@ -106,16 +106,18 @@ export default function MediaManager() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 p-4">
+     <div className="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-teal-600 rounded-xl flex items-center justify-center">
-              <i className="fas fa-video text-white text-xl"></i>
-            </div>
-            <h1 className="text-3xl font-display font-bold text-gray-900">DEVI JEWELLERS</h1>
-          </div>
+  <div className="flex justify-center mb-4">
+    <img 
+      src="/logo.png" 
+      alt="Devi Jewellers Logo" 
+      className="h-40 w-[350px] object-contain"
+    />
+  </div>
+
           <h2 className="text-xl font-semibold text-gray-700">Media Manager</h2>
           <p className="text-gray-600">Upload and manage promotional videos and images for TV ads</p>
         </div>
@@ -164,7 +166,7 @@ export default function MediaManager() {
                     <SelectTrigger data-testid="select-media-type">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white border border-gray-200 shadow-lg">
                       <SelectItem value="auto">Auto Detect</SelectItem>
                       <SelectItem value="image">Image</SelectItem>
                       <SelectItem value="video">Video</SelectItem>
@@ -181,7 +183,7 @@ export default function MediaManager() {
                     <SelectTrigger data-testid="select-auto-activate">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white border border-gray-200 shadow-lg">
                       <SelectItem value="true">Yes, activate immediately</SelectItem>
                       <SelectItem value="false">No, keep inactive</SelectItem>
                     </SelectContent>

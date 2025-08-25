@@ -152,32 +152,32 @@ export default function TVDisplay() {
             className="flex-1 flex flex-col"
           >
             {/* Header with Company Logo */}
-            <div className="relative bg-gradient-to-r from-jewelry-primary to-jewelry-secondary text-white py-4 flex-shrink-0">
-              <div className="container mx-auto px-4 flex items-center justify-between">
-                <div className="flex items-center space-x-4">
-                  <div className="w-16 h-16 bg-gold-500 rounded-full flex items-center justify-center shadow-lg">
-                    <i className="fas fa-gem text-2xl text-white"></i>
-                  </div>
-                  <div>
-                    <h1 className="text-3xl font-display font-bold tracking-wide">DEVI JEWELLERS</h1>
-                    <p className="text-gold-200 text-sm">Premium Gold & Silver Collection</p>
-                  </div>
-                </div>
+            <div className="relative bg-gradient-to-r from-jewelry-primary to-jewelry-secondary text-redtoday py-1 flex-shrink-0">
+             <div className="container mx-auto px-10 flex items-center justify-between">
+              <div className="w-full flex items-center justify-center py-2">
+                {/* Replace text with logo */}
+                 <img 
+                   src="/logo.png" 
+                   alt="Devi Jewellers Logo" 
+                   className="h-40 object-contain"
+                                                    />
+                   </div>
                 
                 {/* Date and Time */}
-                <div className="text-right bg-black bg-opacity-30 px-6 py-3 rounded-lg backdrop-blur-sm">
-                  <div className="text-lg font-semibold text-gold-200">
+                <div className="absolute top-4 right-6 bg-black bg-opacity-10 px-3 py-2 rounded-lg backdrop-blur-sm text-right">
+                  <div className="text-3xl font-bold text-black">
                     {format(currentTime, "EEEE dd-MMM-yyyy")}
                   </div>
-                  <div className="text-2xl font-bold text-white">
+                  <div className="text-5xl font-bold text-black">
                     {format(currentTime, "HH:mm:ss")}
                   </div>
                 </div>
               </div>
             </div>
 
+
             {/* Today's Rate Header */}
-            <div className="bg-gradient-to-r from-gold-600 to-gold-700 text-white py-3 text-center flex-shrink-0">
+            <div className="bg-gradient-to-r from-gold-600 to-gold-700 text-red py-3 text-center flex-shrink-0">
               <h2 className="text-3xl font-display font-bold">TODAY'S RATES</h2>
             </div>
 
@@ -201,18 +201,18 @@ export default function TVDisplay() {
                         <p className="text-sm text-blue-600 font-semibold mb-1">SALE RATE</p>
                         <p className={`${rateFontSize} font-bold text-blue-800`}>₹{currentRates.gold_24k_sale}</p>
                       </div>
-                      <div className="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-jewelry-accent border-opacity-30">
-                        <p className="text-sm text-jewelry-accent font-semibold mb-1">PURCHASE RATE</p>
-                        <p className={`${rateFontSize} font-bold text-jewelry-accent`}>₹{currentRates.gold_24k_purchase}</p>
+                      <div className="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-blue-800 border-opacity-30">
+                        <p className="text-sm text-blue-600 font-semibold mb-1">PURCHASE RATE</p>
+                        <p className={`${rateFontSize} font-bold text-blue-800`}>₹{currentRates.gold_24k_purchase}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* 22K Gold */}
-                  <div className="rate-card bg-white rounded-xl shadow-xl p-6 border-l-8 border-gold-600 fade-in">
+                  <div className="rate-card bg-white rounded-xl shadow-xl p-6 border-l-8 border-gold-500 fade-in">
                     <div className="flex justify-between items-center mb-4">
                       <h4 className="text-2xl font-bold text-gray-800">22K GOLD</h4>
-                      <div className="w-10 h-10 bg-gold-600 rounded-full gold-shimmer flex items-center justify-center">
+                      <div className="w-10 h-10 bg-gold-100 rounded-full gold-shimmer flex items-center justify-center">
                         <i className="fas fa-medal text-white"></i>
                       </div>
                     </div>
@@ -221,15 +221,15 @@ export default function TVDisplay() {
                         <p className="text-sm text-blue-600 font-semibold mb-1">SALE RATE</p>
                         <p className={`${rateFontSize} font-bold text-blue-800`}>₹{currentRates.gold_22k_sale}</p>
                       </div>
-                      <div className="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-jewelry-accent border-opacity-30">
-                        <p className="text-sm text-jewelry-accent font-semibold mb-1">PURCHASE RATE</p>
-                        <p className={`${rateFontSize} font-bold text-jewelry-accent`}>₹{currentRates.gold_22k_purchase}</p>
+                      <div className="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-blue-800 border-opacity-30">
+                        <p className="text-sm text-blue-600 font-semibold mb-1">PURCHASE RATE</p>
+                        <p className={`${rateFontSize} font-bold text-blue-800`}>₹{currentRates.gold_22k_purchase}</p>
                       </div>
                     </div>
                   </div>
 
                   {/* 18K Gold */}
-                  <div className="rate-card bg-white rounded-xl shadow-xl p-6 border-l-8 border-gold-700 fade-in">
+                  <div className="rate-card bg-white rounded-xl shadow-xl p-6 border-l-8 border-gold-500 fade-in">
                     <div className="flex justify-between items-center mb-4">
                       <h4 className="text-2xl font-bold text-gray-800">18K GOLD</h4>
                       <div className="w-10 h-10 bg-gold-700 rounded-full gold-shimmer flex items-center justify-center">
@@ -241,9 +241,9 @@ export default function TVDisplay() {
                         <p className="text-sm text-blue-600 font-semibold mb-1">SALE RATE</p>
                         <p className={`${rateFontSize} font-bold text-blue-800`}>₹{currentRates.gold_18k_sale}</p>
                       </div>
-                      <div className="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-jewelry-accent border-opacity-30">
-                        <p className="text-sm text-jewelry-accent font-semibold mb-1">PURCHASE RATE</p>
-                        <p className={`${rateFontSize} font-bold text-jewelry-accent`}>₹{currentRates.gold_18k_purchase}</p>
+                      <div className="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-blue-800 border-opacity-30">
+                        <p className="text-sm text-blue-600 font-semibold mb-1">PURCHASE RATE</p>
+                        <p className={`${rateFontSize} font-bold text-blue-800`}>₹{currentRates.gold_18k_purchase}</p>
                       </div>
                     </div>
                   </div>
@@ -267,9 +267,9 @@ export default function TVDisplay() {
                           <p className="text-sm text-blue-600 font-semibold mb-1">SALE RATE</p>
                           <p className={`${rateFontSize} font-bold text-blue-800`}>₹{currentRates.silver_per_kg_sale}</p>
                         </div>
-                        <div className="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-jewelry-accent border-opacity-30">
-                          <p className="text-sm text-jewelry-accent font-semibold mb-1">PURCHASE RATE</p>
-                          <p className={`${rateFontSize} font-bold text-jewelry-accent`}>₹{currentRates.silver_per_kg_purchase}</p>
+                        <div className="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-blue-800 border-opacity-30">
+                          <p className="text-sm text-blue-800 font-semibold mb-1">PURCHASE RATE</p>
+                          <p className={`${rateFontSize} font-bold text-blue-800`}>₹{currentRates.silver_per_kg_purchase}</p>
                         </div>
                       </div>
                     </div>

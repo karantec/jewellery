@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect  } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -27,6 +27,24 @@ export default function PromoManager() {
   });
 
   const activePromos = promoImages.filter(p => p.is_active);
+// Slideshow autoplay effect
+useEffect(() => {
+  let interval: NodeJS.Timeout | null = null;
+
+  if (previewPlaying && activePromos.length > 0) {
+    const duration =
+      activePromos[currentPreviewIndex]?.duration_seconds * 1000 || 5000;
+    interval = setInterval(() => {
+      setCurrentPreviewIndex(
+        (prev) => (prev + 1) % activePromos.length
+      );
+    }, duration);
+  }
+
+  return () => {
+    if (interval) clearInterval(interval);
+  };
+}, [previewPlaying, currentPreviewIndex, activePromos]);
 
   // Upload mutation
   const uploadMutation = useMutation({
@@ -125,16 +143,17 @@ export default function PromoManager() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 p-4">
+     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl flex items-center justify-center">
-              <i className="fas fa-bullhorn text-white text-xl"></i>
-            </div>
-            <h1 className="text-3xl font-display font-bold text-gray-900">DEVI JEWELLERS</h1>
-          </div>
+  <div className="flex justify-center mb-4">
+    <img 
+      src="/logo.png" 
+      alt="Devi Jewellers Logo" 
+      className="h-40 w-[350px] object-contain"
+    />
+  </div>
           <h2 className="text-xl font-semibold text-gray-700">Promotional Manager</h2>
           <p className="text-gray-600">Manage slideshow images displayed below silver rates on TV</p>
         </div>
@@ -164,7 +183,8 @@ export default function PromoManager() {
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Default Duration (seconds)</label>
+                  <label className="block text-sm font-medium 
+text-gray-700 mb-1">Default Duration (seconds)</label>
                   <Input
                     type="number"
                     min="1"
@@ -184,7 +204,7 @@ export default function PromoManager() {
                     <SelectTrigger data-testid="select-default-transition">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white border border-gray-300 shadow-lg rounded-md">
                       {transitionOptions.map(option => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
@@ -292,7 +312,7 @@ export default function PromoManager() {
                     <SelectTrigger className="text-sm" data-testid={`select-transition-${item.id}`}>
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white border border-gray-300 shadow-lg rounded-md z-50">
                       {transitionOptions.map(option => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}

@@ -17,6 +17,10 @@ const navItems: NavItem[] = [
 
 export function Navigation() {
   const [location] = useLocation();
+// ❌ Hide navbar only on TV Display page (/)
+  if (location === "/") {
+    return null;
+  }
 
   return (
     <div className="bg-white shadow-lg sticky top-0 z-50">

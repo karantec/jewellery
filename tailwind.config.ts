@@ -1,5 +1,19 @@
 import type { Config } from "tailwindcss";
-
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./client/src/**/*.{js,ts,jsx,tsx}",  // your React/Vite frontend files
+    "./client/index.html"                  // include index.html if you have it
+  ],
+  theme: {
+    extend: {
+      borderColor: {
+        border: "#e5e7eb"  // defines `border-border` class
+      }
+    }
+  },
+  plugins: []
+};
 export default {
   darkMode: ["class"],
   content: ["./client/index.html", "./client/src/**/*.{js,jsx,ts,tsx}"],
@@ -173,6 +187,7 @@ export default {
         "4xl": "1920px",
       },
       aspectRatio: {
+        "16/9": "16 / 9",
         "4/3": "4 / 3",
         "3/2": "3 / 2",
         "5/4": "5 / 4",

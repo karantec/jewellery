@@ -97,14 +97,14 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
       <div className="max-w-6xl mx-auto">
         {/* Dashboard Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center space-x-3 mb-4">
-            <div className="w-12 h-12 bg-gradient-to-r from-jewelry-primary to-jewelry-secondary rounded-xl flex items-center justify-center">
-              <i className="fas fa-gem text-white text-xl"></i>
-            </div>
-            <h1 className="text-3xl font-display font-bold text-gray-900">DEVI JEWELLERS</h1>
-          </div>
-          <h2 className="text-xl font-semibold text-gray-700">Admin Dashboard</h2>
+ <div className="text-center mb-8">
+  <div className="flex justify-center mb-4">
+    <img 
+      src="/logo.png" 
+      alt="Devi Jewellers Logo" 
+      className="h-40 w-[350px] object-contain"
+    />
+  </div>          <h2 className="text-xl font-semibold text-gray-700">Admin Dashboard</h2>
           <p className="text-gray-600">Manage display settings, timing, and appearance</p>
         </div>
 
@@ -112,7 +112,7 @@ export default function AdminDashboard() {
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
               {/* Display Settings */}
-              <Card>
+              <Card className="border border-black">
                 <CardHeader className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white">
                   <CardTitle className="flex items-center">
                     <i className="fas fa-desktop mr-2"></i>Display Configuration
@@ -131,7 +131,7 @@ export default function AdminDashboard() {
                               <SelectValue placeholder="Select orientation" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
+                          <SelectContent className="bg-white border border-gray-300 rounded-md shadow-lg">
                             <SelectItem value="horizontal">Horizontal (Landscape)</SelectItem>
                             <SelectItem value="vertical">Vertical (Portrait)</SelectItem>
                           </SelectContent>
@@ -153,7 +153,7 @@ export default function AdminDashboard() {
                               <SelectValue placeholder="Select font size" />
                             </SelectTrigger>
                           </FormControl>
-                          <SelectContent>
+                          <SelectContent className="bg-white border border-gray-300 rounded-md shadow-lg">
                             <SelectItem value="text-2xl">Small (2XL)</SelectItem>
                             <SelectItem value="text-3xl">Medium (3XL)</SelectItem>
                             <SelectItem value="text-4xl">Large (4XL)</SelectItem>
@@ -180,6 +180,7 @@ export default function AdminDashboard() {
                             checked={field.value}
                             onCheckedChange={field.onChange}
                             data-testid="switch-show-media"
+                            className="data-[state=checked]:bg-blue-500 [&>span]:bg-white [&>span]:border-2 [&>span]:border-black"
                           />
                         </FormControl>
                         <FormMessage />
@@ -190,7 +191,7 @@ export default function AdminDashboard() {
               </Card>
 
               {/* Color Customization */}
-              <Card>
+              <Card className="border border-black">
                 <CardHeader className="bg-gradient-to-r from-purple-500 to-pink-500 text-white">
                   <CardTitle className="flex items-center">
                     <i className="fas fa-palette mr-2"></i>Color Customization
@@ -277,7 +278,7 @@ export default function AdminDashboard() {
               </Card>
 
               {/* Timing Settings */}
-              <Card>
+              <Card className="border border-black">
                 <CardHeader className="bg-gradient-to-r from-green-500 to-teal-500 text-white">
                   <CardTitle className="flex items-center">
                     <i className="fas fa-clock mr-2"></i>Timing Configuration
@@ -337,7 +338,7 @@ export default function AdminDashboard() {
               </Card>
 
               {/* System Information */}
-              <Card>
+              <Card className="border border-black">
                 <CardHeader className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white">
                   <CardTitle className="flex items-center">
                     <i className="fas fa-info-circle mr-2"></i>System Information
@@ -370,7 +371,7 @@ export default function AdminDashboard() {
                     </>
                   )}
 
-                  <div className="pt-3 border-t border-gray-200">
+                  <div className="pt-3 border-t border-gray-500">
                     <h4 className="font-medium text-gray-800 mb-2">Quick Actions</h4>
                     <div className="grid grid-cols-2 gap-2">
                       <Button 
@@ -399,7 +400,7 @@ export default function AdminDashboard() {
             <div className="text-center">
               <Button 
                 type="submit" 
-                className="bg-gradient-to-r from-jewelry-primary to-jewelry-secondary text-white px-8 py-4 text-lg"
+                className="bg-gradient-to-r from-jewelry-primary to-jewelry-secondary text-black px-8 py-4 text-lg border border-black"
                 disabled={updateSettingsMutation.isPending}
                 data-testid="button-save-settings"
               >

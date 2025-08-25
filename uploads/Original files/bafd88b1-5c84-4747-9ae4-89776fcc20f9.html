@@ -1,0 +1,1123 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVI JEWELLERS - Gold Rate Management System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#FFFDE7',
+                            100: '#FFF8E1',
+                            200: '#FFECB3',
+                            300: '#FFE082',
+                            400: '#FFD54F',
+                            500: '#FFC107',
+                            600: '#FFB300',
+                            700: '#FF8F00',
+                            800: '#FF6F00',
+                            900: '#E65100'
+                        },
+                        jewelry: {
+                            primary: '#4A148C',
+                            secondary: '#6A1B9A',
+                            accent: '#00C853'
+                        }
+                    },
+                    fontFamily: {
+                        'display': ['Playfair Display', 'serif'],
+                        'body': ['Roboto', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .gold-shimmer {
+            animation: shimmer 2s infinite;
+            background: linear-gradient(45deg, #FFD700, #FFC107, #FFD700);
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        
+        .rate-card {
+            transition: all 0.3s ease;
+        }
+        
+        .rate-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .tv-display {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFFDE7 100%);
+        }
+
+        .mobile-nav {
+            background: linear-gradient(135deg, #4A148C 0%, #6A1B9A 100%);
+        }
+    </style>
+</head>
+<body class="font-body bg-gold-50">
+    <!-- Navigation Tabs -->
+    <div class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto">
+            <nav class="flex overflow-x-auto">
+                <button onclick="showSection('tv-display')" class="nav-btn flex-shrink-0 px-6 py-4 text-center border-b-2 border-gold-500 bg-gold-50 text-jewelry-primary font-semibold">
+                    <i class="fas fa-tv mr-2"></i>TV Display
+                </button>
+                <button onclick="showSection('mobile-control')" class="nav-btn flex-shrink-0 px-6 py-4 text-center border-b-2 border-transparent hover:border-gold-300 text-gray-600 hover:text-jewelry-primary">
+                    <i class="fas fa-mobile-alt mr-2"></i>Mobile Control
+                </button>
+                <button onclick="showSection('admin-dashboard')" class="nav-btn flex-shrink-0 px-6 py-4 text-center border-b-2 border-transparent hover:border-gold-300 text-gray-600 hover:text-jewelry-primary">
+                    <i class="fas fa-cog mr-2"></i>Admin Dashboard
+                </button>
+                <button onclick="showSection('media-manager')" class="nav-btn flex-shrink-0 px-6 py-4 text-center border-b-2 border-transparent hover:border-gold-300 text-gray-600 hover:text-jewelry-primary">
+                    <i class="fas fa-images mr-2"></i>Media Manager
+                </button>
+                <button onclick="showSection('promo-manager')" class="nav-btn flex-shrink-0 px-6 py-4 text-center border-b-2 border-transparent hover:border-gold-300 text-gray-600 hover:text-jewelry-primary">
+                    <i class="fas fa-bullhorn mr-2"></i>Promo Manager
+                </button>
+            </nav>
+        </div>
+    </div>
+
+    <!-- TV Display Section -->
+    <div id="tv-display" class="section">
+        <div class="tv-display min-h-screen">
+            <!-- Company Header -->
+            <div class="relative bg-gradient-to-r from-jewelry-primary to-jewelry-secondary text-white py-4">
+                <div class="container mx-auto px-4 flex items-center justify-between">
+                    <!-- Company logo placeholder with ornate design -->
+                    <div class="flex items-center space-x-4">
+                        <div class="w-16 h-16 bg-gold-500 rounded-full flex items-center justify-center shadow-lg">
+                            <i class="fas fa-gem text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl font-display font-bold tracking-wide">DEVI JEWELLERS</h1>
+                            <p class="text-gold-200 text-sm">Premium Gold & Silver Collection</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Date and Time -->
+                    <div class="text-right bg-black bg-opacity-30 px-6 py-3 rounded-lg backdrop-blur-sm">
+                        <div class="text-lg font-semibold text-gold-200">Friday, 17-Jan-2025</div>
+                        <div class="text-2xl font-bold text-white">14:25:30</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Today's Rate Banner -->
+            <div class="bg-gradient-to-r from-gold-600 to-gold-700 text-white py-3 text-center">
+                <h2 class="text-3xl font-display font-bold">TODAY'S RATES</h2>
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="container mx-auto px-6 py-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 min-h-[600px]">
+                    <!-- Gold Rates Column -->
+                    <div class="space-y-6">
+                        <h3 class="text-2xl font-display font-bold text-center text-jewelry-primary mb-6">GOLD RATES (Per 10 GMS)</h3>
+                        
+                        <!-- 24K Gold Rate Card -->
+                        <div class="rate-card bg-white rounded-xl shadow-xl p-6 border-l-8 border-gold-500 fade-in">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-2xl font-bold text-gray-800">24K GOLD</h4>
+                                <div class="w-10 h-10 bg-gold-500 rounded-full gold-shimmer flex items-center justify-center">
+                                    <i class="fas fa-star text-white"></i>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                    <p class="text-sm text-blue-600 font-semibold mb-1">SALE RATE</p>
+                                    <p class="text-4xl font-bold text-blue-800" data-bind="rates.gold_24k_sale">₹74,850</p>
+                                </div>
+                                <div class="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-jewelry-accent border-opacity-30">
+                                    <p class="text-sm text-jewelry-accent font-semibold mb-1">PURCHASE RATE</p>
+                                    <p class="text-4xl font-bold text-jewelry-accent" data-bind="rates.gold_24k_purchase">₹73,200</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 22K Gold Rate Card -->
+                        <div class="rate-card bg-white rounded-xl shadow-xl p-6 border-l-8 border-gold-600 fade-in">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-2xl font-bold text-gray-800">22K GOLD</h4>
+                                <div class="w-10 h-10 bg-gold-600 rounded-full gold-shimmer flex items-center justify-center">
+                                    <i class="fas fa-medal text-white"></i>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                    <p class="text-sm text-blue-600 font-semibold mb-1">SALE RATE</p>
+                                    <p class="text-4xl font-bold text-blue-800" data-bind="rates.gold_22k_sale">₹68,620</p>
+                                </div>
+                                <div class="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-jewelry-accent border-opacity-30">
+                                    <p class="text-sm text-jewelry-accent font-semibold mb-1">PURCHASE RATE</p>
+                                    <p class="text-4xl font-bold text-jewelry-accent" data-bind="rates.gold_22k_purchase">₹67,100</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 18K Gold Rate Card -->
+                        <div class="rate-card bg-white rounded-xl shadow-xl p-6 border-l-8 border-gold-700 fade-in">
+                            <div class="flex justify-between items-center mb-4">
+                                <h4 class="text-2xl font-bold text-gray-800">18K GOLD</h4>
+                                <div class="w-10 h-10 bg-gold-700 rounded-full gold-shimmer flex items-center justify-center">
+                                    <i class="fas fa-crown text-white"></i>
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                    <p class="text-sm text-blue-600 font-semibold mb-1">SALE RATE</p>
+                                    <p class="text-4xl font-bold text-blue-800" data-bind="rates.gold_18k_sale">₹56,140</p>
+                                </div>
+                                <div class="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-jewelry-accent border-opacity-30">
+                                    <p class="text-sm text-jewelry-accent font-semibold mb-1">PURCHASE RATE</p>
+                                    <p class="text-4xl font-bold text-jewelry-accent" data-bind="rates.gold_18k_purchase">₹54,900</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Silver Rates & Promo Column -->
+                    <div class="space-y-6">
+                        <!-- Silver Rates -->
+                        <div>
+                            <h3 class="text-2xl font-display font-bold text-center text-jewelry-primary mb-6">SILVER RATES (Per KG)</h3>
+                            
+                            <div class="rate-card bg-white rounded-xl shadow-xl p-6 border-l-8 border-gray-400 fade-in">
+                                <div class="flex justify-between items-center mb-4">
+                                    <h4 class="text-2xl font-bold text-gray-800">SILVER</h4>
+                                    <div class="w-10 h-10 bg-gray-400 rounded-full shadow-lg flex items-center justify-center">
+                                        <i class="fas fa-circle text-white"></i>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                        <p class="text-sm text-blue-600 font-semibold mb-1">SALE RATE</p>
+                                        <p class="text-4xl font-bold text-blue-800" data-bind="rates.silver_sale">₹92,500</p>
+                                    </div>
+                                    <div class="text-center p-4 bg-jewelry-accent bg-opacity-10 rounded-lg border border-jewelry-accent border-opacity-30">
+                                        <p class="text-sm text-jewelry-accent font-semibold mb-1">PURCHASE RATE</p>
+                                        <p class="text-4xl font-bold text-jewelry-accent" data-bind="rates.silver_purchase">₹90,800</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Promotional Slideshow -->
+                        <div class="bg-white rounded-xl shadow-xl overflow-hidden fade-in">
+                            <div class="relative aspect-video bg-gradient-to-br from-gold-100 to-gold-200">
+                                <!-- Promotional jewelry collection image -->
+                                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450" alt="Gold jewelry collection display" class="w-full h-full object-cover" data-mock-image="true" data-implementation="Promotional slideshow images" />
+                                
+                                <!-- Slideshow overlay -->
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/50 to-transparent p-4">
+                                    <h4 class="text-white text-xl font-bold">Special Wedding Collection</h4>
+                                    <p class="text-gold-200 text-sm">Exquisite designs for your special day</p>
+                                </div>
+                                
+                                <!-- Transition effect indicator -->
+                                <div class="absolute top-4 right-4 bg-jewelry-primary bg-opacity-70 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                    Fade Effect • 5s
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Banner -->
+            <div class="bg-gradient-to-r from-jewelry-primary to-jewelry-secondary text-white py-4 mt-8">
+                <div class="container mx-auto px-4 text-center">
+                    <p class="text-xl font-semibold">Visit us at DEVI JEWELLERS - Your Trusted Partner in Precious Metals</p>
+                    <p class="text-gold-200 text-sm mt-1">Call: +91-XXXXX-XXXXX | Address: Your Store Location</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Control Section -->
+    <div id="mobile-control" class="section hidden">
+        <div class="min-h-screen bg-gradient-to-br from-jewelry-primary/10 to-jewelry-secondary/10">
+            <!-- Mobile Header -->
+            <div class="mobile-nav text-white p-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gold-500 rounded-full flex items-center justify-center">
+                        <i class="fas fa-gem text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold">DEVI JEWELLERS</h1>
+                        <p class="text-gold-200 text-sm">Rate Control Panel</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 space-y-6">
+                <!-- Quick Status Card -->
+                <div class="bg-white rounded-xl shadow-lg p-4 border-l-4 border-jewelry-accent">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="font-semibold text-gray-800">Last Updated</h3>
+                            <p class="text-sm text-gray-600">Today at 2:25 PM</p>
+                        </div>
+                        <div class="w-3 h-3 bg-jewelry-accent rounded-full animate-pulse"></div>
+                    </div>
+                </div>
+
+                <!-- Rate Update Tabs -->
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="bg-gradient-to-r from-gold-500 to-gold-600 p-4">
+                        <h2 class="text-white font-bold text-lg flex items-center">
+                            <i class="fas fa-coins mr-2"></i>Update Gold Rates
+                        </h2>
+                    </div>
+                    
+                    <!-- 24K Gold -->
+                    <div class="p-4 border-b border-gray-100">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-star text-gold-500 mr-2"></i>24K Gold (Per 10 GMS)
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Sale Rate</label>
+                                <input type="number" placeholder="74850" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent" data-bind="input.gold_24k_sale">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Purchase Rate</label>
+                                <input type="number" placeholder="73200" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent" data-bind="input.gold_24k_purchase">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 22K Gold -->
+                    <div class="p-4 border-b border-gray-100">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-medal text-gold-600 mr-2"></i>22K Gold (Per 10 GMS)
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Sale Rate</label>
+                                <input type="number" placeholder="68620" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent" data-bind="input.gold_22k_sale">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Purchase Rate</label>
+                                <input type="number" placeholder="67100" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent" data-bind="input.gold_22k_purchase">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 18K Gold -->
+                    <div class="p-4 border-b border-gray-100">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-crown text-gold-700 mr-2"></i>18K Gold (Per 10 GMS)
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Sale Rate</label>
+                                <input type="number" placeholder="56140" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent" data-bind="input.gold_18k_sale">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Purchase Rate</label>
+                                <input type="number" placeholder="54900" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent" data-bind="input.gold_18k_purchase">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Silver -->
+                    <div class="p-4">
+                        <h3 class="font-semibold text-gray-800 mb-3 flex items-center">
+                            <i class="fas fa-circle text-gray-400 mr-2"></i>Silver (Per KG)
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Sale Rate</label>
+                                <input type="number" placeholder="92500" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent" data-bind="input.silver_sale">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Purchase Rate</label>
+                                <input type="number" placeholder="90800" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gold-500 focus:border-transparent" data-bind="input.silver_purchase">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Update Button -->
+                <button class="w-full bg-gradient-to-r from-jewelry-primary to-jewelry-secondary text-white py-4 rounded-xl font-bold text-lg shadow-lg" data-event="click:updateRates">
+                    <i class="fas fa-save mr-2"></i>Update Rates on TV Display
+                </button>
+
+                <!-- Current Rates Display -->
+                <div class="bg-white rounded-xl shadow-lg p-4">
+                    <h3 class="font-bold text-gray-800 mb-3 flex items-center">
+                        <i class="fas fa-eye text-blue-500 mr-2"></i>Currently Displayed Rates
+                    </h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between">
+                            <span>24K Gold Sale:</span>
+                            <span class="font-semibold text-blue-600" data-bind="current.gold_24k_sale">₹74,850</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>22K Gold Sale:</span>
+                            <span class="font-semibold text-blue-600" data-bind="current.gold_22k_sale">₹68,620</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>Silver Sale:</span>
+                            <span class="font-semibold text-blue-600" data-bind="current.silver_sale">₹92,500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard Section -->
+    <div id="admin-dashboard" class="section hidden">
+        <div class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4">
+            <div class="max-w-6xl mx-auto">
+                <!-- Dashboard Header -->
+                <div class="text-center mb-8">
+                    <div class="flex items-center justify-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-jewelry-primary to-jewelry-secondary rounded-xl flex items-center justify-center">
+                            <i class="fas fa-gem text-white text-xl"></i>
+                        </div>
+                        <h1 class="text-3xl font-display font-bold text-gray-900">DEVI JEWELLERS</h1>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-700">Admin Dashboard</h2>
+                    <p class="text-gray-600">Manage display settings, timing, and appearance</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Display Settings -->
+                    <div class="bg-white rounded-xl shadow-lg">
+                        <div class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-4 rounded-t-xl">
+                            <h3 class="font-bold text-lg flex items-center">
+                                <i class="fas fa-desktop mr-2"></i>Display Configuration
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">TV Orientation</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <option value="horizontal">Horizontal (Landscape)</option>
+                                    <option value="vertical">Vertical (Portrait)</option>
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Rate Numbers Font Size</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                    <option value="text-2xl">Small (2XL)</option>
+                                    <option value="text-3xl">Medium (3XL)</option>
+                                    <option value="text-4xl" selected>Large (4XL)</option>
+                                    <option value="text-5xl">Extra Large (5XL)</option>
+                                    <option value="text-6xl">Huge (6XL)</option>
+                                </select>
+                            </div>
+
+                            <div class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                                <div>
+                                    <h4 class="font-medium text-gray-800">Show Media Rotation</h4>
+                                    <p class="text-sm text-gray-600">Alternate between rates and promotional content</p>
+                                </div>
+                                <div class="relative">
+                                    <input type="checkbox" checked class="sr-only">
+                                    <div class="w-10 h-6 bg-jewelry-primary rounded-full shadow-inner"></div>
+                                    <div class="absolute w-4 h-4 bg-white rounded-full shadow transition-transform transform translate-x-4 top-1 left-1"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Color Customization -->
+                    <div class="bg-white rounded-xl shadow-lg">
+                        <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-t-xl">
+                            <h3 class="font-bold text-lg flex items-center">
+                                <i class="fas fa-palette mr-2"></i>Color Customization
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Background Color</label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="color" value="#FFF8E1" class="w-12 h-10 border border-gray-300 rounded cursor-pointer">
+                                    <input type="text" value="#FFF8E1" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Text Color</label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="color" value="#212529" class="w-12 h-10 border border-gray-300 rounded cursor-pointer">
+                                    <input type="text" value="#212529" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg">
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Accent Color</label>
+                                <div class="flex items-center space-x-2">
+                                    <input type="color" value="#4A148C" class="w-12 h-10 border border-gray-300 rounded cursor-pointer">
+                                    <input type="text" value="#4A148C" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg">
+                                </div>
+                            </div>
+
+                            <!-- Color Presets -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Quick Presets</label>
+                                <div class="grid grid-cols-4 gap-2">
+                                    <button class="w-full h-8 bg-gradient-to-r from-gold-400 to-gold-600 rounded hover:scale-105 transition-transform" title="Gold Theme"></button>
+                                    <button class="w-full h-8 bg-gradient-to-r from-blue-400 to-blue-600 rounded hover:scale-105 transition-transform" title="Blue Theme"></button>
+                                    <button class="w-full h-8 bg-gradient-to-r from-green-400 to-green-600 rounded hover:scale-105 transition-transform" title="Green Theme"></button>
+                                    <button class="w-full h-8 bg-gradient-to-r from-purple-400 to-purple-600 rounded hover:scale-105 transition-transform" title="Purple Theme"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timing Settings -->
+                    <div class="bg-white rounded-xl shadow-lg">
+                        <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white p-4 rounded-t-xl">
+                            <h3 class="font-bold text-lg flex items-center">
+                                <i class="fas fa-clock mr-2"></i>Timing Configuration
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Refresh Interval (seconds)</label>
+                                <input type="number" value="30" min="10" max="300" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                <p class="text-xs text-gray-600 mt-1">How often to check for rate updates</p>
+                            </div>
+                            
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Rates Display Duration (seconds)</label>
+                                <input type="number" value="15" min="5" max="60" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500">
+                                <p class="text-xs text-gray-600 mt-1">How long to show rates before switching to media</p>
+                            </div>
+
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <h4 class="font-medium text-green-800 mb-1">Current Status</h4>
+                                <p class="text-sm text-green-700">Last sync: 2 minutes ago</p>
+                                <p class="text-sm text-green-700">Next refresh: in 28 seconds</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- System Information -->
+                    <div class="bg-white rounded-xl shadow-lg">
+                        <div class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white p-4 rounded-t-xl">
+                            <h3 class="font-bold text-lg flex items-center">
+                                <i class="fas fa-info-circle mr-2"></i>System Information
+                            </h3>
+                        </div>
+                        <div class="p-6 space-y-4">
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Server Status:</span>
+                                <span class="text-green-600 font-semibold flex items-center">
+                                    <i class="fas fa-circle text-xs mr-1"></i>Online
+                                </span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Local IP:</span>
+                                <span class="font-mono text-sm">192.168.31.177:3000</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Connected Devices:</span>
+                                <span class="font-semibold">3 (TV, Mobile, Tablet)</span>
+                            </div>
+                            
+                            <div class="flex justify-between">
+                                <span class="text-gray-600">Storage Used:</span>
+                                <span class="font-semibold">245 MB / 2 GB</span>
+                            </div>
+
+                            <div class="pt-3 border-t border-gray-200">
+                                <h4 class="font-medium text-gray-800 mb-2">Quick Actions</h4>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <button class="px-3 py-2 bg-blue-100 text-blue-700 rounded-lg text-sm hover:bg-blue-200">
+                                        <i class="fas fa-sync-alt mr-1"></i>Sync Now
+                                    </button>
+                                    <button class="px-3 py-2 bg-red-100 text-red-700 rounded-lg text-sm hover:bg-red-200">
+                                        <i class="fas fa-power-off mr-1"></i>Restart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Save Settings Button -->
+                <div class="mt-8 text-center">
+                    <button class="bg-gradient-to-r from-jewelry-primary to-jewelry-secondary text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-shadow">
+                        <i class="fas fa-save mr-2"></i>Save All Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Media Manager Section -->
+    <div id="media-manager" class="section hidden">
+        <div class="min-h-screen bg-gradient-to-br from-green-50 to-teal-50 p-4">
+            <div class="max-w-6xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <div class="flex items-center justify-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-600 to-teal-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-video text-white text-xl"></i>
+                        </div>
+                        <h1 class="text-3xl font-display font-bold text-gray-900">DEVI JEWELLERS</h1>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-700">Media Manager</h2>
+                    <p class="text-gray-600">Upload and manage promotional videos and images for TV ads</p>
+                </div>
+
+                <!-- Upload Section -->
+                <div class="bg-white rounded-xl shadow-lg mb-8">
+                    <div class="bg-gradient-to-r from-green-500 to-teal-500 text-white p-4 rounded-t-xl">
+                        <h3 class="font-bold text-lg flex items-center">
+                            <i class="fas fa-cloud-upload-alt mr-2"></i>Upload New Media
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-green-400 transition-colors">
+                            <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                            <p class="text-lg font-semibold text-gray-700">Drop files here or click to upload</p>
+                            <p class="text-gray-500 mb-4">Support for images (JPG, PNG) and videos (MP4, AVI)</p>
+                            <input type="file" multiple accept="image/*,video/*" class="hidden" id="media-upload" data-implementation="File upload component">
+                            <button onclick="document.getElementById('media-upload').click()" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 transition-colors">
+                                Select Files
+                            </button>
+                        </div>
+                        
+                        <div class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Default Duration (seconds)</label>
+                                <input type="number" value="30" min="5" max="120" class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Media Type</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                    <option value="auto">Auto Detect</option>
+                                    <option value="image">Image</option>
+                                    <option value="video">Video</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Auto Activate</label>
+                                <select class="w-full px-3 py-2 border border-gray-300 rounded-lg">
+                                    <option value="true">Yes, activate immediately</option>
+                                    <option value="false">No, keep inactive</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Media Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Video Item -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-green-500">
+                        <div class="relative aspect-video bg-gray-100">
+                            <!-- Professional jewelry store interior video -->
+                            <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450" alt="Jewelry store interior with premium displays" class="w-full h-full object-cover" />
+                            
+                            <div class="absolute top-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                                <i class="fas fa-video mr-1"></i>VIDEO
+                            </div>
+                            
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                                <button class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600">
+                                    <i class="fas fa-eye text-xs"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600">
+                                    <i class="fas fa-trash text-xs"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                                45s
+                            </div>
+                            
+                            <!-- Play button overlay -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <button class="w-16 h-16 bg-white bg-opacity-90 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all">
+                                    <i class="fas fa-play text-green-600 text-xl ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Store Interior Showcase</h3>
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <div>
+                                    <label class="text-xs text-gray-600">Duration (sec)</label>
+                                    <input type="number" value="45" class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-gray-600">Order</label>
+                                    <input type="number" value="1" class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-green-600 font-medium">Active</span>
+                                <div class="text-xs text-gray-500">1.2 MB • MP4</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image Item -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                        <div class="relative aspect-video bg-gray-100">
+                            <!-- Gold jewelry necklace display -->
+                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450" alt="Elegant gold necklace with precious stones" class="w-full h-full object-cover" />
+                            
+                            <div class="absolute top-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                                <i class="fas fa-image mr-1"></i>IMAGE
+                            </div>
+                            
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                                <button class="w-8 h-8 bg-gray-500 text-white rounded-full flex items-center justify-center hover:bg-gray-600">
+                                    <i class="fas fa-eye-slash text-xs"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600">
+                                    <i class="fas fa-trash text-xs"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                                20s
+                            </div>
+                        </div>
+                        
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800 mb-2">Premium Gold Collection</h3>
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <div>
+                                    <label class="text-xs text-gray-600">Duration (sec)</label>
+                                    <input type="number" value="20" class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-gray-600">Order</label>
+                                    <input type="number" value="2" class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500 font-medium">Inactive</span>
+                                <div class="text-xs text-gray-500">847 KB • JPG</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upload Placeholder -->
+                    <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl border-2 border-dashed border-gray-300 flex items-center justify-center aspect-video">
+                        <div class="text-center">
+                            <i class="fas fa-plus-circle text-4xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600 font-medium">Add New Media</p>
+                            <p class="text-gray-500 text-sm">Upload images or videos</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bulk Actions -->
+                <div class="mt-8 bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="font-bold text-gray-800 mb-4">Bulk Actions</h3>
+                    <div class="flex flex-wrap gap-3">
+                        <button class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition-colors">
+                            <i class="fas fa-eye mr-2"></i>Activate Selected
+                        </button>
+                        <button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors">
+                            <i class="fas fa-eye-slash mr-2"></i>Deactivate Selected
+                        </button>
+                        <button class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                            <i class="fas fa-trash mr-2"></i>Delete Selected
+                        </button>
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                            <i class="fas fa-download mr-2"></i>Download Selected
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promo Manager Section -->
+    <div id="promo-manager" class="section hidden">
+        <div class="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50 p-4">
+            <div class="max-w-6xl mx-auto">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <div class="flex items-center justify-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-pink-600 to-purple-600 rounded-xl flex items-center justify-center">
+                            <i class="fas fa-bullhorn text-white text-xl"></i>
+                        </div>
+                        <h1 class="text-3xl font-display font-bold text-gray-900">DEVI JEWELLERS</h1>
+                    </div>
+                    <h2 class="text-xl font-semibold text-gray-700">Promotional Manager</h2>
+                    <p class="text-gray-600">Manage slideshow images displayed below silver rates on TV</p>
+                </div>
+
+                <!-- Upload Section -->
+                <div class="bg-white rounded-xl shadow-lg mb-8">
+                    <div class="bg-gradient-to-r from-pink-500 to-purple-500 text-white p-4 rounded-t-xl">
+                        <h3 class="font-bold text-lg flex items-center">
+                            <i class="fas fa-upload mr-2"></i>Upload New Promotional Images
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Upload Area -->
+                            <div class="border-2 border-dashed border-purple-300 rounded-lg p-6 text-center hover:border-purple-400 transition-colors">
+                                <i class="fas fa-images text-3xl text-purple-400 mb-3"></i>
+                                <p class="text-lg font-semibold text-gray-700">Drop images here</p>
+                                <p class="text-gray-500 mb-3">Support for JPG, PNG files</p>
+                                <input type="file" multiple accept="image/*" class="hidden" id="promo-upload" data-implementation="Promo image upload component">
+                                <button onclick="document.getElementById('promo-upload').click()" class="bg-purple-500 text-white px-6 py-2 rounded-lg hover:bg-purple-600 transition-colors">
+                                    Select Images
+                                </button>
+                            </div>
+
+                            <!-- Default Settings -->
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Default Duration (seconds)</label>
+                                    <input type="number" value="5" min="1" max="30" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-1">Default Transition</label>
+                                    <select class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                        <option value="fade">Fade</option>
+                                        <option value="slide-left">Slide Left</option>
+                                        <option value="slide-right">Slide Right</option>
+                                        <option value="zoom-in">Zoom In</option>
+                                        <option value="zoom-out">Zoom Out</option>
+                                        <option value="flip-x">Flip (X-axis)</option>
+                                        <option value="flip-y">Flip (Y-axis)</option>
+                                        <option value="rotate-in">Rotate In</option>
+                                        <option value="rotate-out">Rotate Out</option>
+                                        <option value="bounce">Bounce</option>
+                                    </select>
+                                </div>
+
+                                <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                                    <div>
+                                        <h4 class="font-medium text-gray-800">Auto-activate uploads</h4>
+                                        <p class="text-sm text-gray-600">Start displaying immediately after upload</p>
+                                    </div>
+                                    <div class="relative">
+                                        <input type="checkbox" checked class="sr-only">
+                                        <div class="w-10 h-6 bg-purple-500 rounded-full shadow-inner"></div>
+                                        <div class="absolute w-4 h-4 bg-white rounded-full shadow transition-transform transform translate-x-4 top-1 left-1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Promotional Images Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Active Promo Image -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-purple-500">
+                        <div class="relative aspect-video bg-gray-100">
+                            <!-- Wedding jewelry collection promotional image -->
+                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450" alt="Wedding jewelry collection promotional display" class="w-full h-full object-cover" />
+                            
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                                <button class="w-8 h-8 bg-purple-500 text-white rounded-full flex items-center justify-center hover:bg-purple-600">
+                                    <i class="fas fa-eye text-xs"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600">
+                                    <i class="fas fa-trash text-xs"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                                5s
+                            </div>
+                            
+                            <div class="absolute bottom-2 right-2 bg-purple-600 bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                                Fade
+                            </div>
+                        </div>
+                        
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800 mb-3">Wedding Collection Promo</h3>
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <div>
+                                    <label class="text-xs text-gray-600">Duration (sec)</label>
+                                    <input type="number" value="5" min="1" max="30" class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-gray-600">Order</label>
+                                    <input type="number" value="1" class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-xs text-gray-600">Transition</label>
+                                <select class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                    <option value="fade" selected>Fade</option>
+                                    <option value="slide-left">Slide Left</option>
+                                    <option value="zoom-in">Zoom In</option>
+                                </select>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between">
+                                <span class="text-sm text-purple-600 font-medium flex items-center">
+                                    <i class="fas fa-circle text-xs mr-1"></i>Active
+                                </span>
+                                <div class="text-xs text-gray-500">652 KB • JPG</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inactive Promo Image -->
+                    <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200 opacity-75">
+                        <div class="relative aspect-video bg-gray-100">
+                            <!-- Festival offer promotional banner -->
+                            <img src="https://images.unsplash.com/photo-1506630448388-4e683c67ddb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450" alt="Festival jewelry offers promotional banner" class="w-full h-full object-cover" />
+                            
+                            <div class="absolute top-2 right-2 flex space-x-1">
+                                <button class="w-8 h-8 bg-gray-500 text-white rounded-full flex items-center justify-center hover:bg-gray-600">
+                                    <i class="fas fa-eye-slash text-xs"></i>
+                                </button>
+                                <button class="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center hover:bg-red-600">
+                                    <i class="fas fa-trash text-xs"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="absolute bottom-2 left-2 bg-black bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                                8s
+                            </div>
+                            
+                            <div class="absolute bottom-2 right-2 bg-purple-600 bg-opacity-70 text-white px-2 py-1 rounded text-xs">
+                                Slide Left
+                            </div>
+                        </div>
+                        
+                        <div class="p-4">
+                            <h3 class="font-semibold text-gray-800 mb-3">Festival Offers Banner</h3>
+                            <div class="grid grid-cols-2 gap-2 mb-3">
+                                <div>
+                                    <label class="text-xs text-gray-600">Duration (sec)</label>
+                                    <input type="number" value="8" min="1" max="30" class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                </div>
+                                <div>
+                                    <label class="text-xs text-gray-600">Order</label>
+                                    <input type="number" value="2" class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-xs text-gray-600">Transition</label>
+                                <select class="w-full px-2 py-1 border border-gray-300 rounded text-sm">
+                                    <option value="fade">Fade</option>
+                                    <option value="slide-left" selected>Slide Left</option>
+                                    <option value="zoom-in">Zoom In</option>
+                                </select>
+                            </div>
+                            <div class="mt-3 flex items-center justify-between">
+                                <span class="text-sm text-gray-500 font-medium flex items-center">
+                                    <i class="fas fa-circle text-xs mr-1"></i>Inactive
+                                </span>
+                                <div class="text-xs text-gray-500">834 KB • PNG</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add New Placeholder -->
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl border-2 border-dashed border-purple-300 flex items-center justify-center aspect-video">
+                        <div class="text-center">
+                            <i class="fas fa-plus-circle text-4xl text-purple-400 mb-2"></i>
+                            <p class="text-purple-700 font-medium">Add New Promo</p>
+                            <p class="text-purple-500 text-sm">Upload promotional image</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slideshow Preview -->
+                <div class="mt-8 bg-white rounded-xl shadow-lg">
+                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-4 rounded-t-xl">
+                        <h3 class="font-bold text-lg flex items-center">
+                            <i class="fas fa-play-circle mr-2"></i>Slideshow Preview
+                        </h3>
+                    </div>
+                    <div class="p-6">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- Preview Window -->
+                            <div class="relative bg-gray-100 rounded-lg overflow-hidden aspect-video">
+                                <!-- Current preview image -->
+                                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450" alt="Current slideshow preview" class="w-full h-full object-cover" />
+                                
+                                <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center">
+                                    <div class="text-center text-white">
+                                        <i class="fas fa-play-circle text-4xl mb-2"></i>
+                                        <p class="font-semibold">Slideshow Preview</p>
+                                        <p class="text-sm text-gray-200">Current: Wedding Collection (1 of 2)</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Progress bar -->
+                                <div class="absolute bottom-0 left-0 right-0 h-1 bg-black bg-opacity-50">
+                                    <div class="h-full bg-purple-500" style="width: 60%; transition: width 0.1s;"></div>
+                                </div>
+                            </div>
+
+                            <!-- Controls and Info -->
+                            <div class="space-y-4">
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h4 class="font-semibold text-purple-800 mb-2">Slideshow Settings</h4>
+                                    <div class="space-y-2 text-sm">
+                                        <div class="flex justify-between">
+                                            <span>Total Images:</span>
+                                            <span class="font-semibold">2 active</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Total Duration:</span>
+                                            <span class="font-semibold">13 seconds</span>
+                                        </div>
+                                        <div class="flex justify-between">
+                                            <span>Loop Mode:</span>
+                                            <span class="font-semibold">Continuous</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <h4 class="font-semibold text-gray-800">Preview Controls</h4>
+                                    <div class="flex space-x-2">
+                                        <button class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors flex-1">
+                                            <i class="fas fa-play mr-2"></i>Play
+                                        </button>
+                                        <button class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition-colors flex-1">
+                                            <i class="fas fa-pause mr-2"></i>Pause
+                                        </button>
+                                    </div>
+                                    <button class="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors">
+                                        <i class="fas fa-tv mr-2"></i>Preview on TV Display
+                                    </button>
+                                </div>
+
+                                <div class="bg-yellow-50 p-3 rounded-lg border border-yellow-200">
+                                    <div class="flex items-start space-x-2">
+                                        <i class="fas fa-info-circle text-yellow-600 mt-0.5"></i>
+                                        <div class="text-sm text-yellow-800">
+                                            <p class="font-medium">Display Location</p>
+                                            <p>Images appear below silver rates on the TV display in a continuous slideshow.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-xl p-8 text-center">
+            <div class="w-16 h-16 border-4 border-gold-500 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-lg font-semibold text-gray-800">Processing...</p>
+            <p class="text-gray-600">Please wait while we update the display</p>
+        </div>
+    </div>
+
+    <!-- JavaScript for section switching and basic interactions -->
+    <script>
+        (() => {
+            // Section switching functionality
+            function showSection(sectionId) {
+                // Hide all sections
+                document.querySelectorAll('.section').forEach(section => {
+                    section.classList.add('hidden');
+                });
+                
+                // Show selected section
+                document.getElementById(sectionId).classList.remove('hidden');
+                
+                // Update navigation
+                document.querySelectorAll('.nav-btn').forEach(btn => {
+                    btn.classList.remove('border-gold-500', 'bg-gold-50', 'text-jewelry-primary');
+                    btn.classList.add('border-transparent', 'text-gray-600');
+                });
+                
+                // Highlight active nav
+                event.target.classList.remove('border-transparent', 'text-gray-600');
+                event.target.classList.add('border-gold-500', 'bg-gold-50', 'text-jewelry-primary');
+            }
+
+            // Make showSection globally available
+            window.showSection = showSection;
+
+            // Initialize with TV display section
+            document.addEventListener('DOMContentLoaded', () => {
+                showSection('tv-display');
+                
+                // Update time every second for TV display
+                setInterval(() => {
+                    const now = new Date();
+                    const dateStr = now.toLocaleDateString('en-GB', { 
+                        weekday: 'long', 
+                        day: '2-digit', 
+                        month: 'short', 
+                        year: 'numeric' 
+                    });
+                    const timeStr = now.toLocaleTimeString('en-GB', { 
+                        hour12: false 
+                    });
+                    
+                    // Update TV display time (if in that section)
+                    const dateElement = document.querySelector('#tv-display .text-lg.font-semibold');
+                    const timeElement = document.querySelector('#tv-display .text-2xl.font-bold');
+                    
+                    if (dateElement) dateElement.textContent = dateStr;
+                    if (timeElement) timeElement.textContent = timeStr;
+                }, 1000);
+
+                // TODO: Implement business logic, API calls, or state management
+                // TODO: Add real-time rate updates
+                // TODO: Implement file upload functionality
+                // TODO: Add slideshow transitions
+                // TODO: Connect to local SQLite database
+                // TODO: Implement settings persistence
+            });
+
+            // Basic form interaction handlers
+            document.addEventListener('click', (e) => {
+                // Handle update rates button
+                if (e.target.closest('[data-event="click:updateRates"]')) {
+                    // TODO: Implement rate update logic
+                    const overlay = document.getElementById('loading-overlay');
+                    overlay.classList.remove('hidden');
+                    
+                    setTimeout(() => {
+                        overlay.classList.add('hidden');
+                        alert('Rates updated successfully! Changes will appear on TV display.');
+                    }, 2000);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
