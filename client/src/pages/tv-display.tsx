@@ -159,7 +159,7 @@ export default function TVDisplay() {
                  <img 
                    src="/logo.png" 
                    alt="Devi Jewellers Logo" 
-                   className="h-30 object-contain"
+                   className="h-20 object-contain"
                                                     />
                    </div>
                 
